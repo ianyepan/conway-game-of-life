@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from './components/Grid.js';
 import './App.css';
+import { FaPlay, FaPause, FaStop, FaRandom } from 'react-icons/fa';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -42,7 +43,7 @@ export default class App extends React.Component {
       });
     for (let i = Math.floor(this.rows / 3); i < Math.floor((2 * this.rows) / 3); i++) {
       for (let j = Math.floor((2 * this.cols) / 5); j < Math.floor((3 * this.cols) / 5); j++) {
-        newGrid[i][j] = Math.random() >= 0.65;
+        newGrid[i][j] = Math.random() >= 0.5;
       }
     }
     this.setState({ gridFull: newGrid });
@@ -113,10 +114,18 @@ export default class App extends React.Component {
     return (
       <div>
         <p id="title">Ian's "Conway's Game of Life"</p>
-        <button onClick={this.handleResume}>Play</button>
-        <button onClick={this.handlePause}>Pause</button>
-        <button onClick={this.handleClearScreen}>Clear Screen</button>
-        <button onClick={this.handleRandomRestart}>Random Play</button>
+        <button onClick={this.handleResume}>
+          <FaPlay /> Play
+        </button>
+        <button onClick={this.handlePause}>
+          <FaPause /> Pause
+        </button>
+        <button onClick={this.handleClearScreen}>
+          <FaStop /> Clear Screen
+        </button>
+        <button onClick={this.handleRandomRestart}>
+          <FaRandom /> Random Play
+        </button>
         <Grid gridFull={gridFull} rows={this.rows} cols={this.cols} toggleBox={this.toggleBox} />
         <p>Generation: #{generation}</p>
         <p>
