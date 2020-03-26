@@ -83,6 +83,10 @@ export default class App extends React.Component {
     this.intervalID = setInterval(this.play, this.speed);
   };
 
+  handlePause = () => {
+    clearInterval(this.intervalID);
+  };
+
   handleClearScreen = () => {
     clearInterval(this.intervalID);
     this.setState({
@@ -93,6 +97,10 @@ export default class App extends React.Component {
           return Array(this.cols).fill(false);
         }),
     });
+  };
+
+  handleResume = () => {
+    this.intervalID = setInterval(this.play, this.speed);
   };
 
   handleRandomRestart = () => {
@@ -108,10 +116,12 @@ export default class App extends React.Component {
     const { generation, gridFull } = this.state;
     return (
       <div>
-        <p id="title">Conway's Game of Life</p>
-        <button onClick={this.handleClearScreen}>Stop & Clear Screen</button>
-        <button onClick={this.handleUserStart}>Start with User Config</button>
+        <p id="title">Ian's "Conway's Game of Life"</p>
         <button onClick={this.handleRandomRestart}>Random Restart</button>
+        <button onClick={this.handlePause}>Pause</button>
+        <button onClick={this.handleResume}>Resume</button>
+        <button onClick={this.handleClearScreen}>Clear Screen</button>
+        <button onClick={this.handleUserStart}>Restart with Current Config</button>
         <Grid gridFull={gridFull} rows={this.rows} cols={this.cols} toggleBox={this.toggleBox} />
         <p>Generation: #{generation}</p>
         <p>

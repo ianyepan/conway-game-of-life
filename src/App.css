@@ -7,11 +7,13 @@ a {
 
 button {
   font-family: monospace;
-  font-size: 12px;
+  font-size: 13px;
   color: #d3d3d3;
   background-color: #2e2e2e;
-  border: 1px dashed #66d088;
-  padding: 10px;
+  border: 2px dashed #66c088;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  padding: 5px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
