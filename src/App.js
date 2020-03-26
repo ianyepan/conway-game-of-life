@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Grid from './components/Grid.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.speed = 100;
+    this.rows = 20;
+    this.cols = 40;
+
+    this.state = {
+      generation: 0, // number of current iteration
+      gridFull: Array(this.rows)
+        .fill()
+        .map(() => {
+          return Array(this.cols).fill(false);
+        }),
+    };
+  }
+
+  gridClone = gridFull => {
+    return JSON.parse(JSON.stringify(gridFull));
+  };
+
+  toggleBox = (row, col) => {
+    let newGridFull = this.gridClone(this.state.gridFull);
+    newGridFull[row][col] = !newGridFull[row][col];
+    this.setState({ gridFull: newGridFull })
+  };
+
+  render() {
+    const { generation, gridFull } = this.state;
+    return (
+      <div>
+        <h3>Conway's Game of Life</h3>
+        <Grid gridFull={gridFull} rows={this.rows} cols={this.cols} toggleBox={this.toggleBox} />
+        <h5>Generations: {generation}</h5>
+      </div>
+    );
+  }
 }
-
-export default App;

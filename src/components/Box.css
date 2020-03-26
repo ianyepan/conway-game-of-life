@@ -1,0 +1,20 @@
+.box {
+  box-shadow: 0px 0px 7px #555;
+  display: inline-block;
+  width: 20px;
+  height: 18px;
+  margin-bottom: -2px;
+}
+
+.off {
+  background-color: #eee;
+}
+
+.on {
+  background-color: #555ddd;
+}
+
+.box:hover {
+  /* background: #ddddee; */
+  filter: brightness(80%);
+}
