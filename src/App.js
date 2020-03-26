@@ -21,8 +21,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.randomSeeding();
-    this.handlePlay();
+    this.handleRandomRestart();
   }
 
   gridClone = gridFull => {
@@ -36,13 +35,17 @@ export default class App extends React.Component {
   };
 
   randomSeeding = () => {
-    let newGridFull = this.gridClone(this.state.gridFull);
+    let newGrid = Array(this.rows)
+      .fill()
+      .map(() => {
+        return Array(this.cols).fill(false);
+      });
     for (let i = Math.floor(this.rows / 3); i < Math.floor((2 * this.rows) / 3); i++) {
       for (let j = Math.floor((2 * this.cols) / 5); j < Math.floor((3 * this.cols) / 5); j++) {
-        newGridFull[i][j] = Math.random() >= 0.65;
+        newGrid[i][j] = Math.random() >= 0.65;
       }
     }
-    this.setState({ gridFull: newGridFull });
+    this.setState({ gridFull: newGrid });
   };
 
   // main function: one interation
@@ -55,35 +58,60 @@ export default class App extends React.Component {
       for (let j = 0; j < this.cols; j++) {
         let neighbours = 0;
 
-        if (i > 0) if (originalGrid[i - 1][j]) neighbours++;
-        if (i > 0 && j > 0) if (originalGrid[i - 1][j - 1]) neighbours++;
-        if (i > 0 && j < this.cols - 1) if (originalGrid[i - 1][j + 1]) neighbours++;
-        if (j < this.cols - 1) if (originalGrid[i][j + 1]) neighbours++;
-        if (j > 0) if (originalGrid[i][j - 1]) neighbours++;
-        if (i < this.rows - 1) if (originalGrid[i + 1][j]) neighbours++;
-        if (i < this.rows - 1 && j > 0) if (originalGrid[i + 1][j - 1]) neighbours++;
-        if (i < this.rows - 1 && j < this.cols - 1) if (originalGrid[i + 1][j + 1]) neighbours++;
+        if (i > 0 && originalGrid[i - 1][j]) neighbours++;
+        if (i > 0 && j > 0 && originalGrid[i - 1][j - 1]) neighbours++;
+        if (i > 0 && j < this.cols - 1 && originalGrid[i - 1][j + 1]) neighbours++;
+        if (j < this.cols - 1 && originalGrid[i][j + 1]) neighbours++;
+        if (j > 0 && originalGrid[i][j - 1]) neighbours++;
+        if (i < this.rows - 1 && originalGrid[i + 1][j]) neighbours++;
+        if (i < this.rows - 1 && j > 0 && originalGrid[i + 1][j - 1]) neighbours++;
+        if (i < this.rows - 1 && j < this.cols - 1 && originalGrid[i + 1][j + 1]) neighbours++;
 
         if (originalGrid[i][j] && (neighbours < 2 || neighbours > 3)) newGrid[i][j] = false; // dies
         if (!originalGrid[i][j] && neighbours === 3) newGrid[i][j] = true; // lives
       }
     }
-    this.setState((state) => ({
+    this.setState(state => ({
       gridFull: newGrid,
-      generation: state.generation + 1
-    }))
+      generation: state.generation + 1,
+    }));
   };
 
-  handlePlay = () => {
+  startPlay = () => {
+    this.setState(state => ({ generation: 0 }));
     clearInterval(this.intervalID);
     this.intervalID = setInterval(this.play, this.speed);
   };
+
+  handleClearScreen = () => {
+    clearInterval(this.intervalID);
+    this.setState({
+      generation: 0,
+      gridFull: Array(this.rows)
+        .fill()
+        .map(() => {
+          return Array(this.cols).fill(false);
+        }),
+    });
+  };
+
+  handleRandomRestart = () => {
+    this.randomSeeding();
+    this.startPlay();
+  };
+
+  handleUserStart = () => {
+    this.startPlay();
+  }
 
   render() {
     const { generation, gridFull } = this.state;
     return (
       <div>
         <p id="title">Conway's Game of Life</p>
+        <button onClick={this.handleClearScreen}>Stop & Clear Screen</button>
+        <button onClick={this.handleUserStart}>Start with User Config</button>
+        <button onClick={this.handleRandomRestart}>Random Restart</button>
         <Grid gridFull={gridFull} rows={this.rows} cols={this.cols} toggleBox={this.toggleBox} />
         <p>Generation: #{generation}</p>
         <p>

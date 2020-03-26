@@ -4,3 +4,19 @@
 a {
   color: #66d088
 }
+
+button {
+  font-family: monospace;
+  font-size: 12px;
+  color: #d3d3d3;
+  background-color: #2e2e2e;
+  border: 1px dashed #66d088;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover {
+  filter: brightness(150%);
+}
