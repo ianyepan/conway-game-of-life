@@ -6,8 +6,7 @@ const Box = props => {
     props.toggleBox(props.row, props.col);
   };
 
-  const boxClassName = props.boxClassName;
-  return <div className={boxClassName} id={props.id} onClick={handleSelect}></div>;
+  return <div className={props.boxClassName} id={props.id} onClick={handleSelect}></div>;
 };
 
 export default Box;

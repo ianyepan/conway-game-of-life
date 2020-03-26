@@ -1,4 +1,6 @@
 html {
   color: #d3d3d3;
   background-color: #1e1e1e;
+  font-family: 'Source Code Pro', 'Menlo', 'Monaco', monospace;
+  font-weight: lighter;
 }

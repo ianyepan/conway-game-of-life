@@ -21,7 +21,7 @@ const Grid = props => {
     }
   }
   return (
-    <div className="grid" style={{ width: props.cols * 20 }}>
+    <div className="grid" style={{ width: props.cols * (20+2) }}>
       {rowsArr}
     </div>
   );

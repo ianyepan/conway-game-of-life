@@ -1,20 +1,24 @@
 .box {
-  box-shadow: 0px 0px 7px #555;
+  box-shadow: 0px 0px 7px #66ee99;
   display: inline-block;
   width: 20px;
   height: 18px;
+  margin-left: 2px;
   margin-bottom: -2px;
 }
 
 .off {
-  background-color: #eee;
+  background-color: #303030;
 }
 
 .on {
-  background-color: #555ddd;
+  background-color: #eee;
 }
 
-.box:hover {
-  /* background: #ddddee; */
+.off:hover {
+  filter: brightness(150%);
+}
+
+.on:hover {
   filter: brightness(80%);
 }

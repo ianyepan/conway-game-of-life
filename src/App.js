@@ -1,12 +1,13 @@
 import React from 'react';
 import Grid from './components/Grid.js';
+import './App.css';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.speed = 100;
-    this.rows = 20;
+    this.rows = 25;
     this.cols = 40;
 
     this.state = {
@@ -47,9 +48,13 @@ export default class App extends React.Component {
     const { generation, gridFull } = this.state;
     return (
       <div>
-        <h3>Conway's Game of Life</h3>
+        <p id="title">Conway's Game of Life</p>
         <Grid gridFull={gridFull} rows={this.rows} cols={this.cols} toggleBox={this.toggleBox} />
-        <h5>Generations: {generation}</h5>
+        <p>Generation: #{generation}</p>
+        <p>
+          Copyright 2020 Ian Y.E. Pan | Made with ReactJS |{' '}
+          <a target="_blank" href="https://github.com/ianpan870102/conway-game-of-life">Source Code (GitHub)</a>
+        </p>
       </div>
     );
   }
