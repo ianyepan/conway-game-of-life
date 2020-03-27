@@ -8,8 +8,8 @@ export default class App extends React.Component {
     super(props);
 
     this.speed = 100;
-    this.rows = 25;
-    this.cols = 40;
+    this.rows = 35;
+    this.cols = 50;
 
     this.state = {
       isPlaying: false,
@@ -115,25 +115,27 @@ export default class App extends React.Component {
 
   render() {
     const playPauseButton = !this.state.isPlaying ? (
-      <button onClick={this.handleResume}>
+      <button className="col" onClick={this.handleResume}>
         <FaPlay /> Play
       </button>
     ) : (
-      <button onClick={this.handlePause}>
+      <button className="col" onClick={this.handlePause}>
         <FaPause /> Pause
       </button>
     );
     const { generation, gridFull } = this.state;
     return (
       <div>
-        <p id="title">Ian's "Conway's Game of Life"</p>
+        <div className="row">
+        <p className="col" id="title">Ian's "Conway's Game of Life"</p>
         {playPauseButton}
-        <button onClick={this.handleClearScreen}>
+        <button className="col" onClick={this.handleClearScreen}>
           <FaStop /> Clear Screen
         </button>
-        <button onClick={this.handleRandomRestart}>
+        <button className="col" onClick={this.handleRandomRestart}>
           <FaRandom /> Random Play
         </button>
+        </div>
         <Grid gridFull={gridFull} rows={this.rows} cols={this.cols} toggleBox={this.toggleBox} />
         <p>Generation: #{generation}</p>
         <p>

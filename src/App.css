@@ -1,17 +1,18 @@
 #title {
-  font-size: 2em;
+  padding-top: 10px;
+  font-size: 1.7em;
 }
 a {
   color: #66d088;
 }
 
 button {
-  font-family: monospace;
+  font-family: "Courier", monospace;
   font-size: 13px;
   color: #d3d3d3;
   background-color: #2e2e2e;
   border: 2px dashed #66c088;
-  margin-right: 10px;
+  margin-left: 10px;
   margin-bottom: 5px;
   padding: 5px;
   text-align: center;
@@ -23,4 +24,12 @@ button {
 button:hover {
   filter: brightness(150%);
   cursor: pointer;
+}
+
+.row {
+  display: table;
+}
+
+.col {
+  display: table-cell;
 }

@@ -1,10 +1,10 @@
 .box {
   box-shadow: 0px 0px 7px #66ee99;
   display: inline-block;
-  width: 20px;
-  height: 18px;
+  width: 15px;
+  height: 13px;
   margin-left: 2px;
-  margin-bottom: -2px;
+  margin-bottom: -3px;
 }
 
 .off {
@@ -16,9 +16,10 @@
 }
 
 .off:hover {
-  filter: brightness(150%);
+  background-color: #66ee99;
+  filter: brightness(70%);
 }
 
 .on:hover {
-  filter: brightness(80%);
+  filter: brightness(70%);
 }
