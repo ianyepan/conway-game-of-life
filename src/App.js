@@ -12,6 +12,7 @@ export default class App extends React.Component {
     this.cols = 40;
 
     this.state = {
+      isPlaying: false,
       generation: 0, // number of current iteration
       gridFull: Array(this.rows)
         .fill()
@@ -79,18 +80,20 @@ export default class App extends React.Component {
   };
 
   startPlay = () => {
-    this.setState(state => ({ generation: 0 }));
+    this.setState(state => ({ isPlaying: true, generation: 0 }));
     clearInterval(this.intervalID);
     this.intervalID = setInterval(this.play, this.speed);
   };
 
   handlePause = () => {
     clearInterval(this.intervalID);
+    this.setState({ isPlaying: false });
   };
 
   handleClearScreen = () => {
     clearInterval(this.intervalID);
     this.setState({
+      isPlaying: false,
       generation: 0,
       gridFull: Array(this.rows)
         .fill()
@@ -102,6 +105,7 @@ export default class App extends React.Component {
 
   handleResume = () => {
     this.intervalID = setInterval(this.play, this.speed);
+    this.setState({ isPlaying: true });
   };
 
   handleRandomRestart = () => {
@@ -110,16 +114,20 @@ export default class App extends React.Component {
   };
 
   render() {
+    const playPauseButton = !this.state.isPlaying ? (
+      <button onClick={this.handleResume}>
+        <FaPlay /> Play
+      </button>
+    ) : (
+      <button onClick={this.handlePause}>
+        <FaPause /> Pause
+      </button>
+    );
     const { generation, gridFull } = this.state;
     return (
       <div>
         <p id="title">Ian's "Conway's Game of Life"</p>
-        <button onClick={this.handleResume}>
-          <FaPlay /> Play
-        </button>
-        <button onClick={this.handlePause}>
-          <FaPause /> Pause
-        </button>
+        {playPauseButton}
         <button onClick={this.handleClearScreen}>
           <FaStop /> Clear Screen
         </button>
