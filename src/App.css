@@ -17,6 +17,7 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  min-width: 100px;
 }
 
 button:hover {
