@@ -42,8 +42,8 @@ export default class App extends React.Component {
         return Array(this.cols).fill(false);
       });
     for (let i = Math.floor(this.rows / 3); i < Math.floor((2 * this.rows) / 3); i++) {
-      for (let j = Math.floor((2 * this.cols) / 5); j < Math.floor((3 * this.cols) / 5); j++) {
-        newGrid[i][j] = Math.random() >= 0.5;
+      for (let j = Math.floor((1 * this.cols) / 5); j < Math.floor((4 * this.cols) / 5); j++) {
+        newGrid[i][j] = Math.random() >= 0.6;
       }
     }
     this.setState({ gridFull: newGrid });
