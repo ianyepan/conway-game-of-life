@@ -3,4 +3,4 @@
 ##### Wikipedia: https://en.wikipedia.org/wiki/Conway's_Game_of_Life
 
 ##### Gameplay Screenshot:
-![Alt text](./conway3.png)
+![Alt text](./conway4.png)
